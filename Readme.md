@@ -1,7 +1,7 @@
 # Личный проект «Дела в Порядке»
 
 * Студент: [Наталья Волчатова](https://up.htmlacademy.ru/php/6/user/415439).
-* Наставник: [Антон Попов] (https://htmlacademy.ru/profile/joker).
+* Наставник: [Антон Попов](https://htmlacademy.ru/profile/joker).
 
 ---
 
