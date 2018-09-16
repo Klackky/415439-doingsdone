@@ -1,5 +1,7 @@
 'use strict';
 
+//some text
+
 var expandControls = document.querySelectorAll('.expand-control');
 
 var hidePopups = function () {
