@@ -47,7 +47,7 @@ $tasks = [
   ]
   ];
 
-function calculateTotalTasks ($tasksArray, $projectName) {
+function calculateTotalTasks($tasksArray, $projectName) {
   $totalTasks = 0;
   foreach($tasksArray as $task) {
     if ($task['type'] === $projectName) {
