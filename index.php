@@ -1,49 +1,52 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$taskTypes = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
+
+$taskTypes = [
+  'incoming' => 'Входящие',
+  'education' => 'Учеба',
+  'work' => 'Работа',
+  'housework' => 'Домашние дела',
+  'auto' => 'Авто'
+];
+
 $tasks = [
-    $task1 = [
-        'title' => 'Собеседование в IT компании',
-        'date' => '01.12.2018',
-        'type' => 'Работа',
-        'completed' => false
-    ],
-
-    $task2 = [
-        'title' => 'Выполнить тестовое задание',
-        'date' => '25.12.2018',
-        'type' => 'Работа',
-        'completed' => false
-    ],
-
-    $task3 = [
-        'title' => 'Сделать задание первого раздела',
-        'date' => '21.12.2018',
-        'type' => 'Учеба',
-        'completed' => true
-    ],
-
-    $task4 = [
-        'title' => 'Встреча с другом',
-        'date' => '22.12.2018',
-        'type' => 'Входящие',
-        'completed' => false
-    ],
-
-    $task5 = [
-        'title' => 'Купить корм для кота',
-        'date' => 'Нет',
-        'type' => 'Домашние дела',
-        'completed' => false
-    ],
-
-    $task6 = [
-        'title' => 'Заказать пиццу',
-        'date' => 'Нет',
-        'type' => 'Домашние дела',
-        'completed' => false
-    ]
+  [
+    'title' => 'Собеседование в IT компании',
+    'date' => '01.12.2018',
+    'type' => $taskTypes['work'],
+     'completed' => false
+  ],
+  [
+    'title' => 'Выполнить тестовое задание',
+    'date' => '25.12.2018',
+    'type' => $taskTypes['work'],
+    'completed' => false
+  ],
+  [
+    'title' => 'Сделать задание первого раздела',
+    'date' => '21.12.2018',
+    'type' => $taskTypes['education'],
+    'completed' => true
+  ],
+  [
+    'title' => 'Встреча с другом',
+    'date' => '22.12.2018',
+    'type' => $taskTypes['incoming'],
+    'completed' => false
+  ],
+  [
+    'title' => 'Купить корм для кота',
+    'date' => 'Нет',
+    'type' => $taskTypes['housework'],
+    'completed' => false
+  ],
+  [
+    'title' => 'Заказать пиццу',
+    'date' => 'Нет',
+    'type' => $taskTypes['housework'],
+    'completed' => false
+  ]
 ]
 
 ?>
@@ -91,9 +94,9 @@ $tasks = [
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                      <?php foreach ($taskTypes as $key => $type): ?>
+                      <?php foreach ($taskTypes as $taskType): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">"<?=$type; ?>"</a>
+                            <a class="main-navigation__list-item-link" href="#">" <?= $taskType; ?> "</a>
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
                       <?php endforeach; ?>
@@ -123,19 +126,19 @@ $tasks = [
 
                     <label class="checkbox">
                         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-                        <input class="checkbox__input visually-hidden show_completed" <?php if ($show_complete_tasks): ?>checked<?php endif; ?>type="checkbox">
+                        <input class="checkbox__input visually-hidden show_completed" <?php if ($show_complete_tasks): ?> checked<?php endif; ?>type="checkbox">
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
 
                 <table class="tasks">
-                <?php foreach ($tasks as $key => $task): ?>
+                <?php foreach ($tasks as $task): ?>
                   <?php if (!$task['completed']): ?>
                     <tr class="tasks__item task">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"> <?=$task['title']; ?> </span>
+                                <span class="checkbox__text"> <?= $task['title']; ?> </span>
                             </label>
                         </td>
 
@@ -143,7 +146,7 @@ $tasks = [
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
 
-                        <td class="task__date"> <?=$task['date']; ?> </td>
+                        <td class="task__date"> <?= $task['date']; ?> </td>
                     </tr>
                   <?php endif; ?>
 
@@ -152,10 +155,10 @@ $tasks = [
                         <td class="task__select">
                           <label class="checkbox task__checkbox">
                             <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                            <span class="checkbox__text"><?=$task['title']; ?></span>
+                            <span class="checkbox__text"> <?= $task['title']; ?> </span>
                           </label>
                         </td>
-                        <td class="task__date"><?=$task['date']; ?></td>
+                        <td class="task__date"> <?= $task['date']; ?> </td>
 
                         <td class="task__controls">
                         </td>
