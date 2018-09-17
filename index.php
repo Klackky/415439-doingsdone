@@ -1,7 +1,7 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$taskTypes = [
+$projects = [
   'incoming' => 'Входящие',
   'education' => 'Учеба',
   'work' => 'Работа',
@@ -12,40 +12,51 @@ $tasks = [
   [
     'title' => 'Собеседование в IT компании',
     'date' => '01.12.2018',
-    'type' => $taskTypes['work'],
+    'type' => $projects['work'],
     'completed' => false
   ],
   [
     'title' => 'Выполнить тестовое задание',
     'date' => '25.12.2018',
-    'type' => $taskTypes['work'],
+    'type' => $projects['work'],
     'completed' => false
   ],
   [
     'title' => 'Сделать задание первого раздела',
     'date' => '21.12.2018',
-    'type' => $taskTypes['education'],
+    'type' => $projects['education'],
     'completed' => true
   ],
   [
     'title' => 'Встреча с другом',
     'date' => '22.12.2018',
-    'type' => $taskTypes['incoming'],
+    'type' => $projects['incoming'],
     'completed' => false
   ],
   [
     'title' => 'Купить корм для кота',
     'date' => false,
-    'type' => $taskTypes['housework'],
+    'type' => $projects['housework'],
     'completed' => false
   ],
   [
     'title' => 'Заказать пиццу',
     'date' => false,
-    'type' => $taskTypes['housework'],
+    'type' => $projects['housework'],
     'completed' => false
   ]
-]
+  ];
+
+function calculateTotalTasks ($tasksArray, $projectName) {
+  $totalTasks = 0;
+  foreach($tasksArray as $task) {
+    if ($task['type'] === $projectName) {
+      $totalTasks++;
+    }
+  }
+  return $totalTasks;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -91,10 +102,10 @@ $tasks = [
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                      <?php foreach ($taskTypes as $taskType): ?>
+                      <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= $taskType; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <a class="main-navigation__list-item-link" href="#"><?= $project; ?></a>
+                            <span class="main-navigation__list-item-count"><?= calculateTotalTasks($tasks, $project) ?></span>
                         </li>
                       <?php endforeach; ?>
                     </ul>
