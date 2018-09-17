@@ -47,6 +47,14 @@ $tasks = [
   ]
   ];
 
+/**
+* Function calculates total tasks in each project
+*
+* @param array $tasksArray — array of tasks
+* @param string $projectName — name of current project
+* @return number — number of total tasks for current project
+*/
+
 function calculateTotalTasks($tasksArray, $projectName) {
   $totalTasks = 0;
   foreach($tasksArray as $task) {
@@ -105,7 +113,7 @@ function calculateTotalTasks($tasksArray, $projectName) {
                       <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $project; ?></a>
-                            <span class="main-navigation__list-item-count"><?= calculateTotalTasks($tasks, $project) ?></span>
+                            <span class="main-navigation__list-item-count"><?= calculateTotalTasks($tasks, $project); ?></span>
                         </li>
                       <?php endforeach; ?>
                     </ul>
