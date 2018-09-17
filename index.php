@@ -96,7 +96,7 @@ $tasks = [
                     <ul class="main-navigation__list">
                       <?php foreach ($taskTypes as $taskType): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">" <?= $taskType; ?> "</a>
+                            <a class="main-navigation__list-item-link" href="#"> "<?= $taskType; ?>"</a>
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
                       <?php endforeach; ?>
