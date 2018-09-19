@@ -46,7 +46,6 @@ $tasks = [
     'completed' => false
   ]
   ];
-
 /**
 * Function calculates total tasks in each project
 *
@@ -54,7 +53,6 @@ $tasks = [
 * @param string $projectName — name of current project
 * @return number — number of total tasks for current project
 */
-
 function calculateTotalTasks($tasksArray, $projectName) {
   $totalTasks = 0;
   foreach($tasksArray as $task) {
@@ -64,7 +62,6 @@ function calculateTotalTasks($tasksArray, $projectName) {
   }
   return $totalTasks;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
