@@ -1,4 +1,6 @@
 <?php
+// показывать или нет выполненные задачи
+$showCompletedTasks = rand(0, 1);
 
 /**
 * Function calculates total tasks in each project
@@ -26,7 +28,7 @@ function calculateTotalTasks($tasksArray, $projectName) {
  * @return string rendered template
  */
 
-function include_template($name, $data) {
+function includeTemplate($name, $data) {
   $name = 'templates/' . $name;
   $result = '';
 
@@ -52,6 +54,20 @@ return $result;
 
 function esc($string)  {
   return htmlspecialchars($string);
+}
+
+//time functions
+
+function calculateTimeLeftToDate($date) {
+  $currentTime = time();
+  $timeToTask = strtotime($date);
+  $secs_in_day = 86400;
+  $timeLeft = $timeToTask - $currentTime;
+  $hours_until_end = floor($timeLeft / $secs_in_day) * 24;
+
+  if ($date and $hours_until_end < 24) {
+    return true;
+  }
 }
 
 ?>

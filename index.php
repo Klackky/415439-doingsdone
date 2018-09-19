@@ -2,18 +2,18 @@
 require_once('functions.php');
 require_once('data.php');
 
-$page_content = include_template('index.php', [
+$pageContent = includeTemplate('index.php', [
   'tasks' => $tasks,
-  'show_complete_tasks' => $show_complete_tasks,
+  'showCompletedTasks' => $showCompletedTasks,
 ]);
 
-$layout_content = include_template('layout.php', [
-  'content' => $page_content,
+$layoutContent = includeTemplate('layout.php', [
+  'content' => $pageContent,
   'projects' => $projects,
   'tasks' => $tasks,
 	'title' => 'Дела в порядке - Главная страница'
 ]);
 
 
-print($layout_content);
+print($layoutContent);
 ?>

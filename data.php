@@ -1,6 +1,4 @@
 <?php
-// показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
 
 $projects = [
   'incoming' => 'Входящие',
@@ -12,7 +10,7 @@ $projects = [
 $tasks = [
   [
     'title' => 'Собеседование в IT компании',
-    'date' => '01.12.2018',
+    'date' => '20.09.2018',
     'type' => $projects['work'],
     'completed' => false
   ],
