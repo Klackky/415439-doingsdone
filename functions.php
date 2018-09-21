@@ -32,7 +32,7 @@ function includeTemplate($name, $data) {
   $name = 'templates/' . $name;
   $result = '';
 
-  if (!file_exists($name)) {
+  if (!is_readable($name)) {
       return $result;
   }
 
@@ -45,18 +45,14 @@ function includeTemplate($name, $data) {
 return $result;
 }
 
-/**
- * function returns string filtered from special characters
- *
- * @param string string we are got from user
- * @return string string safe for use on our website
- */
-
-function esc($string)  {
-  return htmlspecialchars($string);
-}
 
 //time functions
+/**
+ * function responsible for calculating time remaining
+ *
+ * @param string $date date
+ * @return boolean returns true if remaining time less than 24 hours
+ */
 
 function calculateTimeLeftToDate($date) {
   $currentTime = time();
@@ -68,6 +64,7 @@ function calculateTimeLeftToDate($date) {
   if ($date and $hours_until_end < 24) {
     return true;
   }
+  return false;
 }
 
 ?>
