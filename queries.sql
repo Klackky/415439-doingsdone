@@ -36,5 +36,5 @@ SELECT * FROM tasks WHERE deadline = '2018-09-27';
 UPDATE tasks SET title = 'Собеседование в фармацевтической компании' WHERE task_id = 2;
 
 
-// попробовала джойны
+--попробовала джойны
 SELECT * FROM projects JOIN users ON (projects.user_id = users.user_id) WHERE users.name = 'Игнат' AND projects.project_id = 1;
