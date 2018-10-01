@@ -13,7 +13,7 @@ $showCompletedTasks = rand(0, 1);
 function calculateTotalTasks($tasksArray, $projectName) {
   $totalTasks = 0;
   foreach($tasksArray as $task) {
-    if ($task['type'] === $projectName) {
+    if ($task['project_id'] === $projectName) {
       $totalTasks++;
     }
   }
@@ -65,6 +65,22 @@ function calculateTimeLeftToDate($date) {
     return true;
   }
   return false;
+}
+/**
+ * function converts sql format date to d/m/y
+ *
+ * @param string $date date
+ * @return number date in new format
+ */
+
+function convertTime ($date) {
+  if ($date !== NULL ) {
+  $timestamp = strtotime($date);
+  $mydate = date('d.m.y', $timestamp);
+  return $mydate;
+  } else {
+  return false;
+  }
 }
 
 ?>

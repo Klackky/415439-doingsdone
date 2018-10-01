@@ -8,7 +8,7 @@ USE doingsdone;
 CREATE TABLE projects (
   project_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
   title CHAR(30) NOT NULL,
-  user_id INT NOT NULL,
+  user_id INT NOT NULL
 );
 
 CREATE TABLE tasks (
