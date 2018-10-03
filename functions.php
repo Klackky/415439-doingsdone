@@ -6,14 +6,14 @@ $showCompletedTasks = rand(0, 1);
 * Function calculates total tasks in each project
 *
 * @param array $tasksArray — array of tasks
-* @param string $projectName — name of current project
+* @param string $projectName — id of current project
 * @return number — number of total tasks for current project
 */
 
-function calculateTotalTasks($tasksArray, $projectName) {
+function calculateTotalTasks($tasksArray, $project_id) {
   $totalTasks = 0;
   foreach($tasksArray as $task) {
-    if ($task['type'] === $projectName) {
+    if ($task['project_id'] === $project_id) {
       $totalTasks++;
     }
   }
@@ -65,6 +65,20 @@ function calculateTimeLeftToDate($date) {
     return true;
   }
   return false;
+}
+/**
+ * function converts sql format date to d/m/y
+ *
+ * @param string $date date
+ * @return number date in new format
+ */
+
+function convertTime ($date) {
+  if ($date) {
+    $timestamp = strtotime($date);
+    $mydate = date('d.m.y', $timestamp);
+    return $mydate;
+  }
 }
 
 ?>
