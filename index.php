@@ -17,18 +17,18 @@ if ($tasks_result) {
   $tasks = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
 }
 
-$pageContent = includeTemplate('index.php', [
+$page_content = include_template('index.php', [
   'tasks' => $tasks,
-  'showCompletedTasks' => $showCompletedTasks,
+  'show_completed_tasks' => $show_completed_tasks,
 ]);
 
-$layoutContent = includeTemplate('layout.php', [
-  'content' => $pageContent,
+$layout_content = include_template('layout.php', [
+  'content' => $page_content,
   'projects' => $projects,
   'tasks' => $tasks,
 	'title' => 'Дела в порядке - Главная страница'
 ]);
 
 
-print($layoutContent);
+print($layout_content);
 ?>

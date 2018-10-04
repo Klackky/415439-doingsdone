@@ -15,7 +15,7 @@
 
   <label class="checkbox">
     <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-    <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if ($showCompletedTasks): ?> checked<?php endif; ?>>
+    <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if ($show_completed_tasks): ?> checked<?php endif; ?>>
     <span class="checkbox__text">Показывать выполненные</span>
   </label>
 </div>
@@ -23,7 +23,7 @@
 <table class="tasks">
   <?php foreach ($tasks as $task): ?>
     <?php if (!$task['completed']): ?>
-      <tr class="tasks__item task<?php if (calculateTimeLeftToDate($task['deadline'])): ?> task--important<?php endif; ?>">
+      <tr class="tasks__item task<?php if (calculate_time_left_to_date($task['deadline'])): ?> task--important<?php endif; ?>">
         <td class="task__select">
           <label class="checkbox task__checkbox">
             <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
@@ -37,12 +37,12 @@
         </td>
 
         <td class="task__date">
-          <?= htmlspecialchars(convertTime($task['deadline'])); ?>
+          <?= htmlspecialchars(convert_time($task['deadline'])); ?>
         </td>
       </tr>
     <?php endif; ?>
 
-    <?php if ($task['completed'] and $showCompletedTasks): ?>
+    <?php if ($task['completed'] and $show_completed_tasks): ?>
       <tr class="tasks__item task task--completed">
         <td class="task__select">
           <label class="checkbox task__checkbox">
@@ -52,7 +52,7 @@
           </label>
         </td>
         <td class="task__date">
-          <?= htmlspecialchars(convertTime($task['deadline'])); ?>
+          <?= htmlspecialchars(convert_time($task['deadline'])); ?>
         </td>
 
         <td class="task__controls"> </td>

@@ -1,23 +1,23 @@
 <?php
 // показывать или нет выполненные задачи
-$showCompletedTasks = rand(0, 1);
+$show_completed_tasks = rand(0, 1);
 
 /**
 * Function calculates total tasks in each project
 *
-* @param array $tasksArray — array of tasks
-* @param string $projectName — id of current project
+* @param array $tasks_array— array of tasks
+* @param string $project_id— id of current project
 * @return number — number of total tasks for current project
 */
 
-function calculateTotalTasks($tasksArray, $project_id) {
-  $totalTasks = 0;
-  foreach($tasksArray as $task) {
+function calculate_total_tasks($tasks_array, $project_id) {
+  $total_tasks = 0;
+  foreach($tasks_array as $task) {
     if ($task['project_id'] === $project_id) {
-      $totalTasks++;
+      $total_tasks++;
     }
   }
-  return $totalTasks;
+  return $total_tasks;
 }
 
 /**
@@ -28,7 +28,7 @@ function calculateTotalTasks($tasksArray, $project_id) {
  * @return string rendered template
  */
 
-function includeTemplate($name, $data) {
+function include_template($name, $data) {
   $name = 'templates/' . $name;
   $result = '';
 
@@ -54,12 +54,12 @@ return $result;
  * @return boolean returns true if remaining time less than 24 hours
  */
 
-function calculateTimeLeftToDate($date) {
-  $currentTime = time();
-  $timeToTask = strtotime($date);
+function calculate_time_left_to_date($date) {
+  $current_time = time();
+  $time_to_task = strtotime($date);
   $secs_in_day = 86400;
-  $timeLeft = $timeToTask - $currentTime;
-  $hours_until_end = floor($timeLeft / $secs_in_day) * 24;
+  $time_left = $time_to_task - $current_time;
+  $hours_until_end = floor($time_left / $secs_in_day) * 24;
 
   if ($date and $hours_until_end < 24) {
     return true;
@@ -73,7 +73,7 @@ function calculateTimeLeftToDate($date) {
  * @return number date in new format
  */
 
-function convertTime ($date) {
+function convert_time ($date) {
   if ($date) {
     $timestamp = strtotime($date);
     $mydate = date('d.m.y', $timestamp);
