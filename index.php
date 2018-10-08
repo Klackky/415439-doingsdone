@@ -15,7 +15,7 @@ if (isset($_GET['project_id'])) {
   if(!$filtered_project) {
     http_response_code(404);
   } else {
-  $tasks_request = "SELECT`title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id";
+  $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id";
   $tasks = get_array_from_sql($connect, $tasks_request);
   }
 }
