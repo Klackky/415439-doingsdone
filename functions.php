@@ -1,6 +1,8 @@
 <?php
+require_once('config.php');
 // показывать или нет выполненные задачи
 $show_completed_tasks = rand(0, 1);
+
 
 /**
 * Function calculates total tasks in each project
@@ -79,6 +81,16 @@ function convert_time ($date) {
     $mydate = date('d.m.y', $timestamp);
     return $mydate;
   }
+}
+
+function get_array_from_sql ($connect, $result) {
+  mysqli_set_charset($connect, "utf8");
+  $result = mysqli_query($connect, $result);
+  $array = null;
+  if ($result) {
+    $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  }
+  return $array;
 }
 
 ?>
