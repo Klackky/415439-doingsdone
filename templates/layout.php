@@ -44,8 +44,8 @@
                     <ul class="main-navigation__list">
                       <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?= $project['title']; ?></a>
-                            <span class="main-navigation__list-item-count"><?= calculateTotalTasks($tasks, $project['project_id']); ?></span>
+                            <a class="main-navigation__list-item-link" href="?project_id=<?= $project['project_id'] ?>"><?= $project['title']; ?></a>
+                            <span class="main-navigation__list-item-count"><?= calculate_total_tasks($default_tasks, $project['project_id']); ?></span>
                         </li>
                       <?php endforeach; ?>
                     </ul>
