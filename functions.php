@@ -68,12 +68,13 @@ function calculate_time_left_to_date($date) {
   }
   return false;
 }
+
 /**
  * function converts sql format date to d/m/y
  *
  * @param string $date date
  * @return number date in new format
- */
+*/
 
 function convert_time ($date) {
   if ($date) {
@@ -82,6 +83,14 @@ function convert_time ($date) {
     return $mydate;
   }
 }
+
+/**
+ * function converts sql format to array
+ *
+ * @param object $connect
+ * @param string $result string with sql request
+ * @return array $array array from sql request
+*/
 
 function get_array_from_sql ($connect, $result) {
   mysqli_set_charset($connect, "utf8");
