@@ -10,7 +10,7 @@ $default_tasks = get_array_from_sql($connect, $sql_tasks);
 
 if (isset($_GET['project_id'])) {
   $project_id = intval($_GET['project_id']);
-  $request_project = "SELECT `title`, `project_id` FROM projects WHERE `project_id` = $project_id";
+  $request_project = "SELECT `title`, `project_id` FROM projects WHERE project_id = $project_id";
   $filtered_project = get_array_from_sql($connect, $request_project);
   if(!$filtered_project) {
     http_response_code(404);
