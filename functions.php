@@ -93,13 +93,11 @@ function convert_time ($date) {
 */
 
 function get_array_from_sql ($connect, $result) {
-  mysqli_set_charset($connect, "utf8");
   $result = mysqli_query($connect, $result);
-  $array = null;
   if ($result) {
-    $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+   return mysqli_fetch_all($result, MYSQLI_ASSOC);
   }
-  return $array;
+  return null;
 }
 
 ?>

@@ -2,8 +2,8 @@
 require_once('functions.php');
 
 
-$sql = 'SELECT `title`, `project_id` FROM projects WHERE user_id = 2';
-$projects = get_array_from_sql($connect, $sql);
+$sql_projects = 'SELECT `title`, `project_id` FROM projects WHERE user_id = 2';
+$projects = get_array_from_sql($connect, $sql_projects);
 
 $sql_tasks = 'SELECT tasks.`title`, `deadline`, tasks.`project_id`, `completed` FROM tasks JOIN projects ON (projects.project_id = tasks.project_id) WHERE projects.user_id = 2';
 $default_tasks = get_array_from_sql($connect, $sql_tasks);
