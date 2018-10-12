@@ -54,8 +54,6 @@
         <td class="task__date">
           <?= htmlspecialchars(convert_time($task['deadline'])); ?>
         </td>
-
-        <td class="task__controls"> </td>
       </tr>
     <?php endif; ?>
 
