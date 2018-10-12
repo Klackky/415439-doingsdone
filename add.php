@@ -63,4 +63,4 @@ else {
     }
     $content = include_template('add-task.php', ['projects' => $projects, 'errors' => $errors]);
 }
-print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks, 'default_tasks' => $tasks]);
+print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks, 'default_tasks' => $tasks, 'title' => 'Дела в порядке - добавление задачи']);
