@@ -36,13 +36,14 @@ else {
         }
       }
         if (!count($errors)) {
-          $sql = 'INSERT INTO tasks (project_id, created, completed, deadline, title, link) VALUES (?, NOW(), NULL, ?, ?, ?)';
+          $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), NULL, ?, ?, ?)';
           $project_id = $task['project_id'] ?: null;
+          $user_id = 2;
           $deadline = $task['deadline'] ? date("Y-m-d",strtotime($task['deadline'])) : null;
           $title = $task['title'];
           $file_path = $task['path'] ?? null;
           $stmt = mysqli_prepare($connect, $sql);
-          mysqli_stmt_bind_param($stmt, 'isss', $project_id, $deadline, $title, $file_path);
+          mysqli_stmt_bind_param($stmt, 'iisss', $project_id, $user_id, $deadline, $title, $file_path);
           $result = mysqli_stmt_execute($stmt);
           header("Location: /doingsdone");
           if (!$result) {
@@ -53,4 +54,4 @@ else {
     }
     $content = include_template('add-task.php', ['projects' => $projects, 'errors' => $errors]);
 }
-print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'default_tasks' => $tasks]);
+print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks]);

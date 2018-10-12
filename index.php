@@ -8,6 +8,7 @@ $projects = get_array_from_sql($connect, $sql_projects);
 
 $sql_tasks = get_tasks_array($user_id);
 $default_tasks = get_array_from_sql($connect, $sql_tasks);
+
 // проверяем есть ли project_id
 if (isset($_GET['project_id'])) {
   $filtered_project = true;
@@ -21,7 +22,7 @@ if (isset($_GET['project_id'])) {
   }
   else {
     if (isset($project_id)) {
-      $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id";;
+      $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id";
     }
     // если project_id нет, то показываем у отфильтрованного проекта все задачи без project_id
     else {

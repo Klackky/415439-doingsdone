@@ -44,12 +44,12 @@
                     <ul class="main-navigation__list">
                       <li class="main-navigation__list-item">
                           <a class="main-navigation__list-item-link" href="?project_id">Без проекта</a>
-                          <span class="main-navigation__list-item-count"></span>
+                          <span class="main-navigation__list-item-count"><?= calculate_unsorted_tasks($default_tasks)?></span>
                       </li>
                       <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="?project_id=<?= $project['project_id'] ?>"><?= $project['title']; ?></a>
-                            <span class="main-navigation__list-item-count"><?= calculate_total_tasks($default_tasks, $project['project_id']); ?></span>
+                            <span class="main-navigation__list-item-count"><?= $project['tasks_amount'] ?></span>
                         </li>
                       <?php endforeach; ?>
                     </ul>
