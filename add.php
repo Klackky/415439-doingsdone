@@ -4,7 +4,8 @@ require_once('sql-requests.php');
 $errors = [];
 
 if (!$connect) {
-    $errors[] = mysqli_connect_error();
+    $error = mysqli_connect_error();
+    $content = include_template('error.php', ['error' => $error]);
 }
 else {
     $user_id = 2;
@@ -19,6 +20,13 @@ else {
 
       if (empty($task['title'])) {
         $errors['title'] = 'Укажите название задачи';
+      }
+
+      if (isset($task['deadline'])) {
+        $task['deadline'] = date('Y-m-d', strtotime( htmlspecialchars($task['deadline'])));
+        if (!$task['deadline']) {
+          $errors['deadline'] = 'Дата должна быть в формате Д.М.Г.';
+        }
       }
 
 
@@ -47,11 +55,12 @@ else {
           $result = mysqli_stmt_execute($stmt);
           header("Location: /doingsdone");
           if (!$result) {
-            $errors[] = mysqli_error($connect);
+            $error = mysqli_error($connect);
+            $content = include_template('error.php', ['error' => $error]);
           }
 
         }
     }
     $content = include_template('add-task.php', ['projects' => $projects, 'errors' => $errors]);
 }
-print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks]);
+print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks, 'default_tasks' => $tasks]);

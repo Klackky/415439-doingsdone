@@ -18,7 +18,8 @@ if (isset($_GET['project_id'])) {
     $filtered_project = get_array_from_sql($connect, $request_project);
   }
   if(!$filtered_project) {
-    http_response_code(404);
+    $error = http_response_code(404);
+    $page_content = include_template('error.php', ['error' => $error]);
   }
   else {
     if (isset($project_id)) {

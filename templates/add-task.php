@@ -24,21 +24,24 @@
   <div class="form__row">
     <label class="form__label" for="date">Дата выполнения</label>
 
-    <input class="form__input form__input--date" type="date" name="deadline" id="date" value="" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+    <input class="form__input form__input--date <?php if (isset($errors['deadline'])): ?>form__input--error<?php endif; ?>" type="date" name="deadline" id="date" value="<?= $_POST['deadline'] ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+    <?php if (isset($errors['date'])) : ?>
+      <p class="form__message"><span class ="form__message error-message"><?=$errors['date']?></span></p>
+    <?php endif; ?>
   </div>
 
   <div class="form__row">
     <label class="form__label" for="preview">Файл</label>
 
     <div class="form__input-file">
-      <input class="visually-hidden" type="file" name="preview" id="preview" value="">
+      <input class="visually-hidden <?php if (isset($errors['file'])): ?>form__input--error<?php endif; ?>" type="file" name="preview" id="preview" value="">
 
       <label class="button button--transparent" for="preview">
         <span>Выберите файл</span>
       </label>
       <?php if (isset($errors['file'])) : ?>
-      <p class="form__message"><span class ="form__message error-message"><?=$errors['file']?></span></p>
-    <?php endif; ?>
+        <p class="form__message"><span class ="form__message error-message"><?=$errors['file']?></span></p>
+      <?php endif; ?>
     </div>
   </div>
 
