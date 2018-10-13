@@ -13,7 +13,8 @@ CREATE TABLE projects (
 
 CREATE TABLE tasks (
   task_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  project_id INT NOT NULL,
+  project_id INT,
+  user_id INT NOT NULL,
   created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   completed DATETIME,
   deadline DATETIME,

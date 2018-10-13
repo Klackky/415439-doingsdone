@@ -5,17 +5,16 @@ $show_completed_tasks = rand(0, 1);
 
 
 /**
-* Function calculates total tasks in each project
+* Function calculates total unsorted tasks
 *
 * @param array $tasks_array— array of tasks
-* @param string $project_id— id of current project
-* @return number — number of total tasks for current project
+* @return number — number of total unsorted tasks
 */
 
-function calculate_total_tasks($tasks_array, $project_id) {
+function calculate_unsorted_tasks($tasks_array) {
   $total_tasks = 0;
   foreach($tasks_array as $task) {
-    if ($task['project_id'] === $project_id) {
+    if ($task['project_id'] === NULL) {
       $total_tasks++;
     }
   }
