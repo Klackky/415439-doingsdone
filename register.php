@@ -19,25 +19,25 @@ else {
     $register = $_POST;
 
 	  $required = ['email', 'password', 'name'];
-    var_dump($register);
 
     if (empty($register['name'])) {
       $errors['name'] = 'Введите имя';
     }
     if (empty($register['password'])) {
-     $errors['password'] = 'Придумайте пароль';
+      $errors['password'] = 'Придумайте пароль';
     }
-    if (empty($register['email']) || !filter_var($register['email'], FILTER_VALIDATE_EMAIL)) {
-      $errors['email'] = 'Введите действительный адрес электронной почты';
+    if (empty($register['email'])) {
+      $errors['email'] = 'Введите адрес электронной почты';
+    } else {
+      var_dump($register['email']);
+      $register['email'] = filter_var($register['email'], FILTER_VALIDATE_EMAIL);
+      if (!$register['email']) {
+          $errors['email'] = 'Введите корректный адрес электронной почты';
+      } elseif (check_if_email_already_exists($connect, $register['email'])) {
+          $errors['email'] = 'Пользователь с адресом этой электронной почты уже зарегистрирован';
+      }
     }
 
-    $email = mysqli_real_escape_string($connect, $register['email']);
-    $sql_result = "SELECT user_id FROM users WHERE email = $email";
-    $email_result = mysqli_query($connect, $sql_result);
-    var_dump($email_result);
-    if ($email_result) {
-      $errors['used_email'] = 'Введенный e-mail уже зарегестрирован';
-    }
     if (!count($errors)) {
     $sql = 'INSERT INTO users (registration_date, email, name, password) VALUES (NOW(), ?, ?, ?)';
     $email = $register['email'];
@@ -46,14 +46,14 @@ else {
     $stmt = mysqli_prepare($connect, $sql);
     mysqli_stmt_bind_param($stmt, 'sss', $email, $name, $password);
     $result = mysqli_stmt_execute($stmt);
-    if (!$result) {
+      if (!$result) {
       $error = mysqli_error($connect);
       $content = include_template('error.php', ['error' => $error]);
-    }
-    else {
+      }
+      else {
       header("Location: /doingsdone");
+      }
     }
-  }
   }
   $content = include_template('register-form.php', ['errors' => $errors]);
 }

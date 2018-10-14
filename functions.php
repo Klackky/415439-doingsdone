@@ -101,4 +101,19 @@ function get_array_from_sql ($connect, $result) {
   return $array;
 }
 
+/**
+ * function checks if email exists in sql
+ *
+ * @param object $connect
+ * @param string $email string with posted email
+ * @return boolean result
+*/
+
+function check_if_email_already_exists($connect, $email) {
+  $email = mysqli_real_escape_string($connect, $email);
+  $sql_email = "SELECT user_id FROM users WHERE email = '$email'";
+  $result = mysqli_query($connect, $sql_email);
+  return (mysqli_num_rows($result) > 0);
+}
+
 ?>
