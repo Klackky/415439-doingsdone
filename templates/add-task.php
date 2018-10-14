@@ -4,7 +4,7 @@
   <div class="form__row">
     <label class="form__label" for="name">Название <sup>*</sup></label>
 
-    <input class="form__input <?php if (isset($errors['title'])): ?>form__input--error<?php endif; ?>" type="text" name="title" id="name" value="<?php if (isset($_POST['title'])): ?><?= $_POST['title']?> <?php endif; ?>" placeholder="Введите название">
+    <input class="form__input <?php if (isset($errors['title'])): ?>form__input--error<?php endif; ?>" type="text" name="title" id="name" value="<?php if (isset($_POST['title'])): ?><?= $_POST['title']?><?php endif; ?>" placeholder="Введите название">
     <?php if (isset($errors['title'])) : ?>
       <p class="form__message"><span class ="form__message error-message"><?=$errors['title']?></span></p>
     <?php endif; ?>

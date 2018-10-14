@@ -2,7 +2,6 @@
 require_once('functions.php');
 require_once('sql-requests.php');
 $errors = [];
-
 if (!$connect) {
     $error = mysqli_connect_error();
     $content = include_template('error.php', ['error' => $error]);
@@ -43,20 +42,22 @@ else {
             $task['path'] = $path;
         }
       }
-        if (!count($errors)) {
-          $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), NULL, ?, ?, ?)';
-          $project_id = $task['project_id'] ?: null;
-          $user_id = 2;
-          $deadline = $task['deadline'] ? date("Y-m-d",strtotime($task['deadline'])) : null;
-          $title = $task['title'];
-          $file_path = $task['path'] ?? null;
-          $stmt = mysqli_prepare($connect, $sql);
-          mysqli_stmt_bind_param($stmt, 'iisss', $project_id, $user_id, $deadline, $title, $file_path);
-          $result = mysqli_stmt_execute($stmt);
-          header("Location: /doingsdone");
+      if (!count($errors)) {
+        $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), NULL, ?, ?, ?)';
+        $project_id = $task['project_id'] ?: null;
+        $user_id = 2;
+        $deadline = $task['deadline'] ? date("Y-m-d",strtotime($task['deadline'])) : null;
+        $title = $task['title'];
+        $file_path = $task['path'] ?? null;
+        $stmt = mysqli_prepare($connect, $sql);
+        mysqli_stmt_bind_param($stmt, 'iisss', $project_id, $user_id, $deadline, $title, $file_path);
+        $result = mysqli_stmt_execute($stmt);
           if (!$result) {
             $error = mysqli_error($connect);
             $content = include_template('error.php', ['error' => $error]);
+          }
+          else {
+            header("Location: /doingsdone");
           }
 
         }
