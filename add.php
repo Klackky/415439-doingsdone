@@ -2,7 +2,6 @@
 require_once('functions.php');
 require_once('sql-requests.php');
 $errors = [];
-
 if (!$connect) {
     $error = mysqli_connect_error();
     $content = include_template('error.php', ['error' => $error]);
