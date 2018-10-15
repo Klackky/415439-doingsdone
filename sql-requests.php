@@ -34,7 +34,7 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $d
         elseif ($deadline_filter_type === 'overdue') {
             $sql_part .= ' AND deadline < \'' . \date('Y-m-d', strtotime('-1 day'))."'";
         }
-        if ($completed !== null) {
+        if ($completed === 1) {
             $sql_part .= " AND completed = {$completed}";
         }
 
