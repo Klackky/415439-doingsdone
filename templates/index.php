@@ -7,10 +7,10 @@
 
 <div class="tasks-controls">
   <nav class="tasks-switch">
-    <a href="/" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-    <a href="/" class="tasks-switch__item">Повестка дня</a>
-    <a href="/" class="tasks-switch__item">Завтра</a>
-    <a href="/" class="tasks-switch__item">Просроченные</a>
+    <a href="/doingsdone" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
+    <a href="/doingsdone?filter_type=today" class="tasks-switch__item">Повестка дня</a>
+    <a href="/doingsdone?filter_type=tomorrow" class="tasks-switch__item">Завтра</a>
+    <a href="/doingsdone?filter_type=overdue" class="tasks-switch__item">Просроченные</a>
   </nav>
 
   <label class="checkbox">
@@ -26,7 +26,7 @@
       <tr class="tasks__item task<?php if (calculate_time_left_to_date($task['deadline'])): ?> task--important<?php endif; ?>">
         <td class="task__select">
           <label class="checkbox task__checkbox">
-            <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+            <input class="checkbox__input visually-hidden task__checkbox<?php if($task['completed']):?> checked<?php endif;?>" type="checkbox" value="1">
             <span class="checkbox__text">
               <?= htmlspecialchars($task['title']); ?></span>
           </label>

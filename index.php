@@ -4,6 +4,7 @@ require_once('config.php');
 if (!empty($_SESSION)) {
   $default_tasks = get_array_from_sql($connect, $sql_tasks);
   // проверяем есть ли project_id
+  $project_id = false;
   if (isset($_GET['project_id'])) {
     $filtered_project = true;
     if ($_GET['project_id']) {
@@ -16,17 +17,18 @@ if (!empty($_SESSION)) {
       $error = http_response_code(404);
       $page_content = include_template('error.php', ['error' => $error]);
     }
-    else {
-      if (isset($project_id)) {
-        $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id and user_id = $user_id";
-      }
-      // если project_id нет, то показываем у отфильтрованного проекта все задачи без project_id
-      else {
-        $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id IS NULL and user_id = $user_id";
-      }
-    $tasks = get_array_from_sql($connect, $tasks_request);
-    }
+
   }
+  $filter_type = null;
+  if (isset($_GET['filter_type'])) {
+    $filter_type = $_GET['filter_type'];
+  }
+  $show_completed = null;
+  if (isset($_GET['show_completed'])) {
+    $show_completed = $_GET['show_completed'];
+  }
+  $sql_tasks = get_tasks_array_by($user_id, $project_id, $show_completed, $filter_type);
+  $tasks = get_array_from_sql($connect, $sql_tasks);
 
   $page_content = include_template('index.php', [
     'tasks' => $tasks,
