@@ -1,6 +1,4 @@
 <?php
-require_once('functions.php');
-require_once('sql-requests.php');
 require_once('config.php');
 $errors = [];
 

@@ -18,8 +18,4 @@ function get_tasks_array ($user_id) {
   return $sql_tasks;
 }
 
-$sql_projects = get_projects_array($user_id);
-$projects = get_array_from_sql($connect, $sql_projects);
-$sql_tasks = get_tasks_array($user_id);
-$tasks = get_array_from_sql($connect, $sql_tasks);
 

@@ -1,8 +1,6 @@
 <?php
-require_once('functions.php');
-require_once('sql-requests.php');
 require_once('config.php');
-
+$errors = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($_POST['password'])) {
     $errors['password'] = 'Введите пароль';
