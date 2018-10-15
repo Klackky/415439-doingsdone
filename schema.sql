@@ -16,7 +16,7 @@ CREATE TABLE tasks (
   project_id INT,
   user_id INT NOT NULL,
   created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  completed DATETIME,
+  completed tinyint(1) NOT NULL DEFAULT '0',
   deadline DATETIME,
   title TEXT(30) NOT NULL,
   link TEXT(300)
