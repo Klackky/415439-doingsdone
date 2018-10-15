@@ -8,12 +8,7 @@ if (!$connect) {
 }
 
 else {
-  $user_id = 2;
-  $sql_projects = get_projects_array($user_id);
-  $projects = get_array_from_sql($connect, $sql_projects);
-
-  $sql_tasks = get_tasks_array($user_id);
-  $tasks = get_array_from_sql($connect, $sql_tasks);
+  session_start();
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $register = $_POST;
@@ -58,4 +53,4 @@ else {
   $content = include_template('register-form.php', ['errors' => $errors]);
 }
 
-print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks, 'default_tasks' => $tasks, 'title' => 'Дела в порядке - регистрация']);
+print include_template('layout.php', ['content' => $content, 'title' => 'Дела в порядке - регистрация']);

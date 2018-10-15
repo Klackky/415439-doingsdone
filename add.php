@@ -7,7 +7,8 @@ if (!$connect) {
     $content = include_template('error.php', ['error' => $error]);
 }
 else {
-    $user_id = 2;
+    session_start();
+    $user_id = $_SESSION['user']['user_id'];
     $sql_projects = get_projects_array($user_id);
     $projects = get_array_from_sql($connect, $sql_projects);
 
@@ -45,7 +46,7 @@ else {
       if (!count($errors)) {
         $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), NULL, ?, ?, ?)';
         $project_id = $task['project_id'] ?: null;
-        $user_id = 2;
+        $user_id = $_SESSION['user']['user_id'];
         $deadline = $task['deadline'] ? date("Y-m-d",strtotime($task['deadline'])) : null;
         $title = $task['title'];
         $file_path = $task['path'] ?? null;

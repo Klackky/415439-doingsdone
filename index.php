@@ -1,8 +1,11 @@
 <?php
 require_once('functions.php');
 require_once('sql-requests.php');
+
 session_start();
-$user_id = 2;
+
+if (!empty($_SESSION)) {
+$user_id = $_SESSION['user']['user_id'];
 $sql_projects = get_projects_array($user_id);
 $projects = get_array_from_sql($connect, $sql_projects);
 
@@ -14,7 +17,7 @@ if (isset($_GET['project_id'])) {
   $filtered_project = true;
   if ($_GET['project_id']) {
     $project_id = intval($_GET['project_id']);
-    $request_project = "SELECT `title`, `project_id` FROM projects WHERE project_id = $project_id";
+    $request_project = "SELECT `title`, `project_id` FROM projects WHERE project_id = $project_id and user_id = $user_id";
     $filtered_project = get_array_from_sql($connect, $request_project);
   }
   if(!$filtered_project) {
@@ -23,11 +26,11 @@ if (isset($_GET['project_id'])) {
   }
   else {
     if (isset($project_id)) {
-      $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id";
+      $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id = $project_id and user_id = $user_id";
     }
     // если project_id нет, то показываем у отфильтрованного проекта все задачи без project_id
     else {
-      $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id IS NULL";
+      $tasks_request = "SELECT `title`, `deadline`, `project_id`, `completed` FROM tasks WHERE project_id IS NULL and user_id = $user_id";
     }
 
     $tasks = get_array_from_sql($connect, $tasks_request);
@@ -37,6 +40,7 @@ if (isset($_GET['project_id'])) {
 else {
    $tasks = $default_tasks;
 }
+
 
 $page_content = include_template('index.php', [
   'tasks' => $tasks,
@@ -51,5 +55,14 @@ $layout_content = include_template('layout.php', [
 	'title' => 'Дела в порядке - Главная страница'
 ]);
 
+
+} else {
+  $page_content = include_template('guest.php', [
+  ]);
+  $layout_content = include_template('layout.php', [
+    'content' => $page_content,
+    'title' => 'Дела в порядке - Главная страница'
+  ]);
+}
 print($layout_content);
 ?>
