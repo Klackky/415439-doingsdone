@@ -25,7 +25,7 @@ if (!empty($_SESSION)) {
 
   $show_completed_tasks = 0;
   if (isset($_GET['show_completed'])) {
-    $show_completed_tasks = $_GET['show_completed'] ? null : 0;
+    $show_completed_tasks = $_GET['show_completed'];
   }
 
   if (isset($_GET['task_id'])) {
