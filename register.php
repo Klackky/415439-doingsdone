@@ -42,7 +42,7 @@ else {
     $sql = 'INSERT INTO users (registration_date, email, name, password) VALUES (NOW(), ?, ?, ?)';
     $email = $register['email'];
     $name = $register['name'];
-    $password = $register['password'];
+    $password = password_hash($register['password'], PASSWORD_DEFAULT);
     $stmt = mysqli_prepare($connect, $sql);
     mysqli_stmt_bind_param($stmt, 'sss', $email, $name, $password);
     $result = mysqli_stmt_execute($stmt);

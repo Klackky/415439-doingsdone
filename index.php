@@ -1,7 +1,7 @@
 <?php
 require_once('functions.php');
 require_once('sql-requests.php');
-
+session_start();
 $user_id = 2;
 $sql_projects = get_projects_array($user_id);
 $projects = get_array_from_sql($connect, $sql_projects);
