@@ -38,8 +38,8 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $d
             $sql_part .= " AND completed = {$completed}";
         }
 
-        $sql_tasks = "SELECT `title`, `deadline`, `project_id`, `completed`
-               FROM tasks WHERE user_id = $user_id $sql_part";
+        $sql_tasks = "SELECT `task_id`, `title`, `deadline`, `project_id`, `completed`
+                     FROM tasks WHERE user_id = $user_id $sql_part";
 
         return $sql_tasks;
     }

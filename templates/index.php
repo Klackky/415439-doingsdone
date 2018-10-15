@@ -26,7 +26,7 @@
       <tr class="tasks__item task<?php if (calculate_time_left_to_date($task['deadline'])): ?> task--important<?php endif; ?>">
         <td class="task__select">
           <label class="checkbox task__checkbox">
-            <input class="checkbox__input visually-hidden task__checkbox<?php if($task['completed']):?> checked<?php endif;?>" type="checkbox" value="1">
+            <input class="checkbox__input visually-hidden task__checkbox<?php if($task['completed']):?> checked<?php endif; ?>" type="checkbox" value="<?= $task['task_id']; ?>">
             <span class="checkbox__text">
               <?= htmlspecialchars($task['title']); ?></span>
           </label>
@@ -42,7 +42,7 @@
       </tr>
     <?php endif; ?>
 
-    <?php if ($task['completed'] and $show_completed_tasks): ?>
+    <?php if ($task['completed'] ): ?>
       <tr class="tasks__item task task--completed">
         <td class="task__select">
           <label class="checkbox task__checkbox">

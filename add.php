@@ -4,7 +4,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $task = $_POST;
-  var_dump($task);
+
   if (empty($task['title'])) {
     $errors['title'] = 'Укажите название задачи';
   }
@@ -29,8 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $task['path'] = $path;
     }
   }
+
   if (!count($errors)) {
-    $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), NULL, ?, ?, ?)';
+    $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), 0, ?, ?, ?)';
     $project_id = $task['project_id'] ?: null;
     $user_id = $_SESSION['user']['user_id'];
     $deadline = $task['deadline'] ?: null;

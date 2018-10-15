@@ -54,7 +54,7 @@ $taskCheckboxes.addEventListener('change', function (event) {
     var is_checked = +el.checked;
     var task_id = el.getAttribute('value');
 
-    var url = '/doindsdone?task_id=' + task_id + '&check=' + is_checked;
+    var url = '/doingsdone?task_id=' + task_id + '&check=' + is_checked;
     window.location = url;
   }
 });
