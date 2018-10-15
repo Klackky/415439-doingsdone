@@ -76,7 +76,7 @@ function calculate_time_left_to_date($date) {
 */
 
 function convert_time ($date) {
-  if ($date) {
+  if (!empty($date)) {
     $timestamp = strtotime($date);
     $mydate = date('d.m.y', $timestamp);
     return $mydate;

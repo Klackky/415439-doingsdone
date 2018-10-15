@@ -1,12 +1,11 @@
 <?php
 function get_projects_array($user_id) {
   intval($user_id);
-  $sql_projects = "SELECT projects.title, projects.project_id, COUNT(task_id)
+  $sql_projects = "SELECT projects.title, projects.project_id,
+                  (SELECT COUNT(*) from tasks WHERE projects.project_id = tasks.project_id)
                   AS tasks_amount
-                  FROM tasks
-                  JOIN projects
-                  ON tasks.project_id= projects.project_id
-                  WHERE projects.user_id = $user_id  GROUP BY tasks.project_id;";
+                  FROM projects
+                  WHERE projects.user_id = $user_id";
   return $sql_projects;
 }
 

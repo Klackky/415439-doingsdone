@@ -4,12 +4,12 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $task = $_POST;
-
+  var_dump($task);
   if (empty($task['title'])) {
     $errors['title'] = 'Укажите название задачи';
   }
 
-  if (isset($task['deadline'])) {
+  if (!empty($task['deadline'])) {
     $task['deadline'] = date('Y-m-d', strtotime( htmlspecialchars($task['deadline'])));
     if (!$task['deadline']) {
       $errors['deadline'] = 'Дата должна быть в формате Д.М.Г.';
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), NULL, ?, ?, ?)';
     $project_id = $task['project_id'] ?: null;
     $user_id = $_SESSION['user']['user_id'];
-    $deadline = $task['deadline'] ? date("Y-m-d",strtotime($task['deadline'])) : null;
+    $deadline = $task['deadline'] ?: null;
     $title = $task['title'];
     $file_path = $task['path'] ?? null;
     $stmt = mysqli_prepare($connect, $sql);
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_stmt_execute($stmt);
     if (!$result) {
       $error = mysqli_error($connect);
-       $content = include_template('error.php', ['error' => $error]);
+      $content = include_template('error.php', ['error' => $error]);
     }
     else {
       header("Location: /doingsdone");
