@@ -22,8 +22,11 @@
 
 <table class="tasks">
   <?php foreach ($tasks as $task): ?>
-    <?php if (!$task['completed']): ?>
-      <tr class="tasks__item task<?php if (calculate_time_left_to_date($task['deadline'])): ?> task--important<?php endif; ?>">
+    <?php if (!$task['completed'] || ($show_completed_tasks && $task['completed'])): ?>
+      <tr class="tasks__item task
+      <?php if (calculate_time_left_to_date($task['deadline'])): ?> task--important<?php endif; ?>
+      <?php if ($task['completed']): ?> task--completed<?php endif; ?>
+      ">
         <td class="task__select">
           <label class="checkbox task__checkbox">
             <input class="checkbox__input visually-hidden task__checkbox<?php if($task['completed']):?> checked<?php endif; ?>" type="checkbox" value="<?= $task['task_id']; ?>">
@@ -36,21 +39,6 @@
           <a class="download-link" href="#">Home.psd</a>
         </td>
 
-        <td class="task__date">
-          <?= htmlspecialchars(convert_time($task['deadline'])); ?>
-        </td>
-      </tr>
-    <?php endif; ?>
-
-    <?php if ($task['completed'] ): ?>
-      <tr class="tasks__item task task--completed">
-        <td class="task__select">
-          <label class="checkbox task__checkbox">
-            <input class="checkbox__input visually-hidden" type="checkbox" checked>
-            <span class="checkbox__text">
-              <?= htmlspecialchars($task['title']); ?></span>
-          </label>
-        </td>
         <td class="task__date">
           <?= htmlspecialchars(convert_time($task['deadline'])); ?>
         </td>
