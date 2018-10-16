@@ -25,10 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $errors['file'] = 'Загрузите текстовый файл';
     }
     else {
-      move_uploaded_file($tmp_name, './uploaded/'.$path);
+      $name_extension = pathinfo($_FILES['preview']['name'], PATHINFO_EXTENSION);
+      $new_name = uniqid() . '.' . $name_extension;
+      move_uploaded_file($tmp_name, './uploaded/'.$new_name);
       $task['path'] = $path;
     }
   }
+
 
   if (!count($errors)) {
     $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), 0, ?, ?, ?)';

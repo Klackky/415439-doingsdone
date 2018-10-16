@@ -31,5 +31,5 @@ CREATE TABLE users (
   contact_info CHAR(100)
 );
 
-CREATE UNIQUE INDEX email ON user(email);
-CREATE UNIQUE INDEX name ON user(name);
+CREATE UNIQUE INDEX email ON users(email);
+CREATE UNIQUE INDEX name ON users(name);
