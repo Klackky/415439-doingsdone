@@ -32,7 +32,7 @@ if (!empty($_SESSION)) {
   if (isset($_GET['task_id'])) {
     intval($_GET['task_id']);
     $status =  !empty($_GET['check']);
-    $result = update_task_status($connect, $status, $_GET['task_id']);
+    $result = update_task_status($connect, $_GET['task_id']);
     if ($result) {
       header("Location: /doingsdone");
     }
