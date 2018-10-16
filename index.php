@@ -1,15 +1,13 @@
 <?php
 require_once('config.php');
-
-if (!empty($_SESSION)) {
-  $default_tasks = get_array_from_sql($connect, $sql_tasks);
+if (!empty($_SESSION['user'])) {
   $project_id = false;
   if (isset($_GET['project_id'])) {
     $filtered_project = true;
 
-      $project_id = $_GET['project_id'] ? (int) $_GET['project_id'] : null;
-      $request_project = "SELECT `title`, `project_id` FROM projects WHERE project_id = $project_id and user_id = $user_id";
-      $filtered_project = get_array_from_sql($connect, $request_project);
+    $project_id = $_GET['project_id'] ? (int) $_GET['project_id'] : null;
+    $request_project = "SELECT `title`, `project_id` FROM projects WHERE project_id = $project_id and user_id = $user_id";
+    $filtered_project = get_array_from_sql($connect, $request_project);
 
 
     if(!$filtered_project) {
@@ -47,11 +45,15 @@ if (!empty($_SESSION)) {
     'show_completed_tasks' => $show_completed_tasks,
   ]);
 
+  $sidebar = include_template('sidebar.php', [
+    'projects' => $projects,
+    'default_tasks' => $default_tasks,
+  ]);
+
   $layout_content = include_template('layout.php', [
     'content' => $page_content,
-    'projects' => $projects,
+    'sidebar' => $sidebar,
     'tasks' => $tasks,
-    'default_tasks' => $default_tasks,
   	'title' => 'Дела в порядке - Главная страница'
   ]);
 }

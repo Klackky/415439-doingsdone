@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($_POST['email'])) {
     $errors['email'] = 'Введите адрес электронной почты';
   }
-  $auth['email'] = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+
   $email = mysqli_real_escape_string($connect, $_POST['email']);
 	$sql = "SELECT * FROM users WHERE email = '$email'";
   $res = mysqli_query($connect, $sql);

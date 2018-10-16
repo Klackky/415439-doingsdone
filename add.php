@@ -49,5 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
+$sidebar = include_template('sidebar.php', [
+  'projects' => $projects,
+  'default_tasks' => $default_tasks,
+]);
 $content = include_template('add-task.php', ['projects' => $projects, 'errors' => $errors]);
-print include_template('layout.php', ['content' => $content, 'projects' => $projects, 'tasks' => $tasks, 'default_tasks' => $tasks, 'title' => 'Дела в порядке - добавление задачи']);
+print include_template('layout.php', ['content' => $content, 'sidebar' => $sidebar, 'tasks' => $tasks, 'title' => 'Дела в порядке - добавление задачи']);

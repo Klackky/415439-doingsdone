@@ -4,13 +4,13 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $register = $_POST;
-  if (empty($register['name'])) {
+  if (empty(trim($register['name']))) {
     $errors['name'] = 'Введите имя';
   }
-  if (empty($register['password'])) {
+  if (empty(trim($register['password']))) {
     $errors['password'] = 'Придумайте пароль';
   }
-  if (empty($register['email'])) {
+  if (empty(trim($register['email']))) {
     $errors['email'] = 'Введите адрес электронной почты';
   }
   else {
@@ -40,5 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
+$sidebar = include_template('sidebar.php', []);
 $content = include_template('register-form.php', ['errors' => $errors]);
-print include_template('layout.php', ['content' => $content, 'title' => 'Дела в порядке - регистрация']);
+print include_template('layout.php', ['content' => $content, 'sidebar' => $sidebar, 'title' => 'Дела в порядке - регистрация']);
