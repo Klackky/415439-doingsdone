@@ -36,7 +36,7 @@
         </td>
         <td class="task__file">
           <?php if (!empty($task['link'])): ?>
-            <a class="download-link" href="<?=$task['link']; ?>"></a>
+            <a class="download-link" href="<?=$task['link']; ?>"><?=strip_tags($task['link']); ?></a>
           <?php endif; ?>
         </td>
 
