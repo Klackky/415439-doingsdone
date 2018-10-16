@@ -120,8 +120,8 @@ function check_if_email_already_exists($connect, $email) {
  * function returns updated task status
  *
  * @param object $connect
- * @param string $email string with posted email
- * @return boolean result
+ * @param int $task_id id of current task
+ * @return string $result updated task status
 */
 
 
