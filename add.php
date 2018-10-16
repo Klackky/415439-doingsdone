@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_SESSION['user']['user_id'];
     $deadline = $task['deadline'] ?: null;
     $title = $task['title'];
-    $file_path = $task['path'] ?? null;
+    $link = $task['path'] ?? null;
     $stmt = mysqli_prepare($connect, $sql);
-    mysqli_stmt_bind_param($stmt, 'iisss', $project_id, $user_id, $deadline, $title, $file_path);
+    mysqli_stmt_bind_param($stmt, 'iisss', $project_id, $user_id, $deadline, $title, $link);
     $result = mysqli_stmt_execute($stmt);
     if (!$result) {
       $error = mysqli_error($connect);

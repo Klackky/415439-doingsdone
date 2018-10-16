@@ -116,8 +116,17 @@ function check_if_email_already_exists($connect, $email) {
   return (mysqli_num_rows($result) > 0);
 }
 
-function  update_task_status ($connect, $status, $task_id) {
-  $sql = "UPDATE tasks SET completed = '$status' WHERE task_id = '$task_id'";
+/**
+ * function returns updated task status
+ *
+ * @param object $connect
+ * @param int $task_id id of current task
+ * @return string $result updated task status
+*/
+
+
+function  update_task_status ($connect, $task_id) {
+  $sql = "UPDATE tasks SET completed = NOT completed WHERE task_id = '$task_id'";
   $result = mysqli_query($connect, $sql);
   return $result;
 }

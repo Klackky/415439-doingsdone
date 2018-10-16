@@ -26,18 +26,24 @@ if (!empty($_SESSION)) {
   $show_completed_tasks = 0;
   if (isset($_GET['show_completed'])) {
     $show_completed_tasks = $_GET['show_completed'];
+
   }
 
   if (isset($_GET['task_id'])) {
     intval($_GET['task_id']);
-    $status =  !empty($_GET['check']);
-    $result = update_task_status($connect, $status, $_GET['task_id']);
+    $result = update_task_status($connect, $_GET['task_id']);
+    if ($result) {
+      header("Location: /doingsdone");
+    }
   }
+
 
   $sql_tasks = get_tasks_array_by($user_id, $project_id, $show_completed_tasks, $filter_type);
   $tasks = get_array_from_sql($connect, $sql_tasks);
+
   $page_content = include_template('index.php', [
     'tasks' => $tasks,
+    'project_id' => $project_id,
     'show_completed_tasks' => $show_completed_tasks,
   ]);
 
