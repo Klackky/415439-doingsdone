@@ -28,8 +28,10 @@ $sidebar = include_template('sidebar.php', [
   'default_tasks' => $tasks,
 ]);
 $content = include_template('add-project.php', ['projects' => $projects, 'errors' => $errors]);
-print include_template('layout.php', [
+$layout_content = include_template('layout.php', [
   'content' => $content,
   'sidebar' => $sidebar,
   'title' => 'Дела в порядке - добавление проекта'
 ]);
+print($layout_content);
+

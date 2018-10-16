@@ -1,12 +1,19 @@
 <?php
 require_once('functions.php');
 require_once('sql-requests.php');
-$connect = new mysqli('localhost', 'root', 'rootpassword', 'doingsdone');
-mysqli_set_charset($connect, "utf8");
+$connect = mysqli_connect('localhost', 'root', 'rootpassword', 'doingsdone');
+if ($connect) {
+  mysqli_set_charset($connect, "utf8");
+}
 
 if (!$connect) {
   $error = mysqli_connect_error();
   $content = include_template('error.php', ['error' => $error]);
+  $layout_content = include_template('layout.php', [
+      'title' => 'Дела в порядке',
+      'content' => $content
+  ]);
+  print ($layout_content);
   die();
 }
 

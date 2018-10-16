@@ -39,7 +39,7 @@ if (!empty($_SESSION['user'])) {
   $sql_tasks = get_tasks_array_by($user_id, $project_id, $show_completed_tasks, $filter_type);
   $tasks = get_array_from_sql($connect, $sql_tasks);
 
-  $page_content = include_template('index.php', [
+  $content = include_template('index.php', [
     'tasks' => $tasks,
     'project_id' => $project_id,
     'show_completed_tasks' => $show_completed_tasks,
@@ -51,7 +51,7 @@ if (!empty($_SESSION['user'])) {
   ]);
 
   $layout_content = include_template('layout.php', [
-    'content' => $page_content,
+    'content' => $content,
     'sidebar' => $sidebar,
     'tasks' => $tasks,
   	'title' => 'Дела в порядке - Главная страница'
@@ -59,9 +59,9 @@ if (!empty($_SESSION['user'])) {
 }
 
 else {
-  $page_content = include_template('guest.php', []);
+  $content = include_template('guest.php', []);
   $layout_content = include_template('layout.php', [
-    'content' => $page_content,
+    'content' => $content,
     'title' => 'Дела в порядке - Главная страница'
   ]);
 }
