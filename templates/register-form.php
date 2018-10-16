@@ -30,7 +30,7 @@
       <div class="form__row">
         <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-        <input class="form__input<?php if (isset($errors['name'])): ?>form__input--error<?php endif; ?>" type="text" name="name" id="name" value="<?php if (isset($_POST['name'])): ?><?=$_POST['name']?> <?php endif; ?>" placeholder="Введите имя">
+        <input class="form__input<?php if (isset($errors['name'])): ?>form__input--error<?php endif; ?>" type="text" name="name" id="name" value="<?php if (isset($_POST['name'])): ?><?=htmlspecialchars($_POST['name'])?> <?php endif; ?>" placeholder="Введите имя">
         <?php if (isset($errors['name'])) : ?>
           <p class="form__message"><?=$errors['name']?></p>
         <?php endif; ?>
