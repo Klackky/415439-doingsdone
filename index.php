@@ -37,10 +37,11 @@ if (!empty($_SESSION)) {
       header("Location: /doingsdone");
     }
   }
-  $_SESSION['project_id'] = $project_id;
+
 
   $sql_tasks = get_tasks_array_by($user_id, $project_id, $show_completed_tasks, $filter_type);
   $tasks = get_array_from_sql($connect, $sql_tasks);
+
   $page_content = include_template('index.php', [
     'tasks' => $tasks,
     'project_id' => $project_id,

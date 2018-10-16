@@ -34,9 +34,10 @@
               <?= htmlspecialchars($task['title']); ?></span>
           </label>
         </td>
-
         <td class="task__file">
-          <a class="download-link" href="#">Home.psd</a>
+          <?php if (!empty($task['link'])): ?>
+            <a class="download-link" href="<?=$task['link']; ?>"></a>
+          <?php endif; ?>
         </td>
 
         <td class="task__date">
