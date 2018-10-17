@@ -6,6 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($_POST['title'])) {
     $errors['title'] = 'Укажите название проекта';
   }
+  elseif (mb_strlen($_POST['title'])> 30) {
+    $errors['title'] = 'Длина названия проекта не может превышать 30 символов';
+  }
   elseif (check_if_project_already_exists($connect, $_POST['title']))  {
     $errors['title'] = 'Проект с таким именем уже существует';
   }
