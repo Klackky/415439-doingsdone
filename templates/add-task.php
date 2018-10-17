@@ -26,7 +26,7 @@
 
     <input class="form__input form__input--date <?= (isset($errors['deadline'])) ? 'form__input--error' : ''?>" type="date" name="deadline" id="date" value="<?= htmlspecialchars($_POST['deadline']) ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
     <?php if (isset($errors['deadline'])) : ?>
-      <p class="form__message"><span class ="form__message error-message"><?=$errors['date']?></span></p>
+      <p class="form__message"><span class ="form__message error-message"><?=$errors['deadline']?></span></p>
     <?php endif; ?>
   </div>
 

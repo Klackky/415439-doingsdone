@@ -14,8 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if (!empty($task['deadline'])) {
     $task['deadline'] = date('Y-m-d', strtotime( htmlspecialchars($task['deadline'])));
+    var_dump($task['deadline']);
+    var_dump(strtotime('-1 day'));
     if (!$task['deadline']) {
       $errors['deadline'] = 'Дата должна быть в формате Д.М.Г.';
+    }
+    elseif (strtotime($task['deadline']) <= strtotime('-1 day')) {
+      $errors['deadline'] = 'Дата выполнения не может быть раньше даты создания';
     }
   }
 
@@ -24,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $path = $_FILES['preview']['name'];
     $file_type = mime_content_type($tmp_name);
     $types = array("text/plain", "text/html");
-  //  if (!in_array($file_type, $types)) {
     if (strpos($file_type, 'text') !== 0) {
       $errors['file'] = 'Загрузите текстовый файл';
     }
