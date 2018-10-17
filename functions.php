@@ -27,7 +27,7 @@ function calculate_unsorted_tasks($tasks_array) {
  * @param string $name name of template
  * @param array $data data we use inside template
  * @return string rendered template
- */
+*/
 
 function include_template($name, $data) {
   $name = 'templates/' . $name;

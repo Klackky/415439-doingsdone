@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * function forms sql request for projects
+ *
+ * @param int $user_id
+ * @return string sql request
+*/
+
 function get_projects_array($user_id) {
   intval($user_id);
   $sql_projects = "SELECT projects.title, projects.project_id,
@@ -9,6 +17,13 @@ function get_projects_array($user_id) {
   return $sql_projects;
 }
 
+/**
+ * function forms sql request for tasks
+ *
+ * @param int $user_id
+ * @return string sql request
+*/
+
 function get_tasks_array ($user_id) {
   intval($user_id);
   $sql_tasks = "SELECT `title`, `deadline`, `project_id`, `completed`
@@ -16,6 +31,16 @@ function get_tasks_array ($user_id) {
                WHERE user_id = $user_id";
   return $sql_tasks;
 }
+
+/**
+ * function forms sql request for tasks depends on filter
+ *
+ * @param int $user_id
+ * @param int|boolean $project_id
+ * @param boolean|null $completed
+ * @param string|null $filter_type
+ * @return string sql request
+*/
 
 function get_tasks_array_by($user_id, $project_id = false, $completed = null, $filter_type = null) {
   intval($user_id);
