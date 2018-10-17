@@ -4,7 +4,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $task = $_POST;
-  var_dump($_POST['project_id']);
+
   if (empty($task['title'])) {
     $errors['title'] = 'Укажите название задачи';
   }
