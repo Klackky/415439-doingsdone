@@ -4,7 +4,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $task = $_POST;
-
+  var_dump($_POST['project_id']);
   if (empty($task['title'])) {
     $errors['title'] = 'Укажите название задачи';
   }
@@ -14,8 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if (!empty($task['deadline'])) {
     $task['deadline'] = date('Y-m-d', strtotime( htmlspecialchars($task['deadline'])));
-    var_dump($task['deadline']);
-    var_dump(strtotime('-1 day'));
     if (!$task['deadline']) {
       $errors['deadline'] = 'Дата должна быть в формате Д.М.Г.';
     }
@@ -23,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $errors['deadline'] = 'Дата выполнения не может быть раньше даты создания';
     }
   }
+
 
   if (!empty($_FILES['preview']['name'])) {
     $tmp_name = $_FILES['preview']['tmp_name'];
@@ -32,11 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (strpos($file_type, 'text') !== 0) {
       $errors['file'] = 'Загрузите текстовый файл';
     }
-    else {
+    else{
       $name_extension = pathinfo($_FILES['preview']['name'], PATHINFO_EXTENSION);
       $new_name = uniqid() . '.' . $name_extension;
-      move_uploaded_file($tmp_name, './uploaded/'.$new_name);
+      $uploaded_file = './uploaded/'.$new_name;
+      move_uploaded_file($tmp_name, $uploaded_file);
       $task['path'] = $path;
+    }
+  }
+  elseif ($task['uploaded_file']) {
+    if (file_exists('./uploaded/'. $task['uploaded_file'])) {
+      $task['path'] = $task['uploaded_file'];
     }
   }
 
@@ -68,7 +73,9 @@ $sidebar = include_template('sidebar.php', [
 
 $content = include_template('add-task.php', [
   'projects' => $projects,
-  'errors' => $errors
+  'errors' => $errors,
+  'uploaded_file' => $uploaded_file ?? '',
+  'path' => $task['path'] ?? ''
 ]);
 
 $layout_content = include_template('layout.php', [

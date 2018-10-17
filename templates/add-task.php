@@ -16,7 +16,7 @@
     <select class="form__input form__input--select" name="project_id" id="project">
     <option value=""></option>
     <?php foreach ($projects as $project): ?>
-      <option value="<?=$project['project_id'] ?>"><?=$project['title']?></option>
+      <option value="<?=$project['project_id'] ?>"<?=isset($_POST['project_id']) && ($_POST['project_id'] === $project['project_id']) ? 'selected' : ''?>><?=$project['title']?> </option>
     <?php endforeach;?>
     </select>
   </div>
@@ -34,6 +34,8 @@
     <label class="form__label" for="preview">Файл</label>
 
     <div class="form__input-file">
+      <input type="hidden" name="uploaded_file" value="<?= $uploaded_file ?>">
+      <input type="hidden" name="path" value="<?= $path ?>">
       <input class="visually-hidden <?= (isset($errors['file'])) ? 'form__input--error' : ''?>" type="file" name="preview" id="preview" value="">
 
       <label class="button button--transparent" for="preview">
