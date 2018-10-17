@@ -12,7 +12,13 @@ if (!empty($_SESSION['user'])) {
 
     if(!$filtered_project) {
       $error = http_response_code(404);
-      $page_content = include_template('error.php', ['error' => $error]);
+      $content = include_template('error.php', ['error' => $error]);
+      $layout_content = include_template('layout.php', [
+      'title' => 'Дела в порядке',
+      'content' => $content
+      ]);
+      print ($layout_content);
+      die();
     }
   }
 

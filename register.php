@@ -34,6 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$result) {
       $error = mysqli_error($connect);
       $content = include_template('error.php', ['error' => $error]);
+      $layout_content = include_template('layout.php', [
+      'title' => 'Дела в порядке',
+      'content' => $content
+      ]);
+      print ($layout_content);
+      die();
     }
     else {
       header("Location: index.php");
