@@ -24,8 +24,8 @@
   <div class="form__row">
     <label class="form__label" for="date">Дата выполнения</label>
 
-    <input class="form__input form__input--date <?php if (isset($errors['deadline'])): ?>form__input--error<?php endif; ?>" type="date" name="deadline" id="date" value="<?= htmlspecialchars($_POST['deadline']) ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
-    <?php if (isset($errors['date'])) : ?>
+    <input class="form__input form__input--date <?= (isset($errors['deadline'])) ? 'form__input--error' : ''?>" type="date" name="deadline" id="date" value="<?= htmlspecialchars($_POST['deadline']) ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+    <?php if (isset($errors['deadline'])) : ?>
       <p class="form__message"><span class ="form__message error-message"><?=$errors['date']?></span></p>
     <?php endif; ?>
   </div>
@@ -34,7 +34,7 @@
     <label class="form__label" for="preview">Файл</label>
 
     <div class="form__input-file">
-      <input class="visually-hidden <?php if (isset($errors['file'])): ?>form__input--error<?php endif; ?>" type="file" name="preview" id="preview" value="">
+      <input class="visually-hidden <?= (isset($errors['file'])) ? 'form__input--error' : ''?>" type="file" name="preview" id="preview" value="">
 
       <label class="button button--transparent" for="preview">
         <span>Выберите файл</span>

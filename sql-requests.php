@@ -2,7 +2,7 @@
 function get_projects_array($user_id) {
   intval($user_id);
   $sql_projects = "SELECT projects.title, projects.project_id,
-                  (SELECT COUNT(*) from tasks WHERE projects.project_id = tasks.project_id)
+                  (SELECT COUNT(*) from tasks WHERE completed = 0 AND projects.project_id = tasks.project_id)
                   AS tasks_amount
                   FROM projects
                   WHERE projects.user_id = $user_id";
@@ -17,7 +17,7 @@ function get_tasks_array ($user_id) {
   return $sql_tasks;
 }
 
-function get_tasks_array_by($user_id, $project_id = false, $completed = null, $deadline_filter_type = null) {
+function get_tasks_array_by($user_id, $project_id = false, $completed = null, $filter_type = null) {
   intval($user_id);
   $sql_part = '';
 
@@ -27,13 +27,13 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $d
   elseif ($project_id) {
       $sql_part .= " AND project_id = $project_id";
   }
-  if ($deadline_filter_type === 'today') {
+  if ($filter_type === 'today') {
       $sql_part .= ' AND deadline = \'' . \date('Y-m-d')."'";
   }
-  elseif ($deadline_filter_type === 'tomorrow') {
+  elseif ($filter_type === 'tomorrow') {
       $sql_part .= ' AND deadline = \'' . \date('Y-m-d', strtotime('+1 day'))."'";
   }
-  elseif ($deadline_filter_type === 'overdue') {
+  elseif ($filter_type === 'overdue') {
       $sql_part .= ' AND deadline <= \'' . \date('Y-m-d', strtotime('-1 day'))."'";
   }
   if ($completed === 1) {

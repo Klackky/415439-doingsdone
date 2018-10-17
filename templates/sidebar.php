@@ -5,13 +5,13 @@
   <nav class="main-navigation">
     <ul class="main-navigation__list">
       <li class="main-navigation__list-item">
-        <a class="main-navigation__list-item-link" href="?project_id">Без проекта</a>
+        <a class="main-navigation__list-item-link" href="?project_id=0">Без проекта</a>
         <span class="main-navigation__list-item-count">
           <?= calculate_unsorted_tasks($default_tasks)?></span>
       </li>
       <?php foreach ($projects as $project): ?>
       <li class="main-navigation__list-item">
-        <a class="main-navigation__list-item-link" href="?project_id=<?= $project['project_id'] ?>">
+        <a class="main-navigation__list-item-link" href="index.php?project_id=<?= $project['project_id'] ?>">
           <?= $project['title']; ?></a>
         <span class="main-navigation__list-item-count">
           <?= $project['tasks_amount'] ?></span>

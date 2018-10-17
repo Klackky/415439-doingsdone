@@ -14,7 +14,7 @@ $show_completed_tasks = rand(0, 1);
 function calculate_unsorted_tasks($tasks_array) {
   $total_tasks = 0;
   foreach($tasks_array as $task) {
-    if ($task['project_id'] === NULL) {
+    if ($task['project_id'] === NULL and !$task['completed']) {
       $total_tasks++;
     }
   }
@@ -113,6 +113,21 @@ function check_if_email_already_exists($connect, $email) {
   $email = mysqli_real_escape_string($connect, $email);
   $sql_email = "SELECT user_id FROM users WHERE email = '$email'";
   $result = mysqli_query($connect, $sql_email);
+  return (mysqli_num_rows($result) > 0);
+}
+
+/**
+ * function checks if email exists in sql
+ *
+ * @param object $connect
+ * @param string $email string with posted project title
+ * @return boolean result
+*/
+
+function check_if_project_already_exists($connect, $project) {
+  $project = mysqli_real_escape_string($connect, $project);
+  $sql_project = "SELECT project_id FROM projects WHERE title = '$project'";
+  $result = mysqli_query($connect, $sql_project);
   return (mysqli_num_rows($result) > 0);
 }
 

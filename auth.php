@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$sql = "SELECT * FROM users WHERE email = '$email'";
   $res = mysqli_query($connect, $sql);
   $user = $res ? mysqli_fetch_array($res, MYSQLI_ASSOC) : null;
-  if(empty($user)) {
+  if(!empty($_POST['email']) && empty($user)) {
     $errors['email'] = 'Такой пользователь не найден';
   }
   if(empty($errors) and !empty($user)) {
@@ -27,5 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
-$content = include_template('auth-form.php', ['errors' => $errors]);
-print include_template('layout.php', ['content' => $content, 'title' => 'Дела в порядке - вход на сайт']);
+$sidebar = include_template('sidebar.php', []);
+
+$page_content = include_template('auth-form.php',
+  ['errors' => $errors
+]);
+
+$layout_content = include_template('layout.php', [
+ 'content' => $page_content,
+ 'sidebar' => $sidebar,
+ 'title' => 'Дела в порядке - вход на сайт']);
+
+print($layout_content);

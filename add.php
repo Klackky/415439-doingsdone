@@ -52,9 +52,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
+
 $sidebar = include_template('sidebar.php', [
   'projects' => $projects,
   'default_tasks' => $default_tasks,
 ]);
-$content = include_template('add-task.php', ['projects' => $projects, 'errors' => $errors]);
-print include_template('layout.php', ['content' => $content, 'sidebar' => $sidebar, 'tasks' => $tasks, 'title' => 'Дела в порядке - добавление задачи']);
+
+$content = include_template('add-task.php', [
+  'projects' => $projects,
+  'errors' => $errors
+]);
+
+$layout_content = include_template('layout.php', [
+  'content' => $content,
+  'sidebar' => $sidebar,
+  'tasks' => $tasks,
+  'title' => 'Дела в порядке - добавление задачи'
+]);
+
+print($layout_content);
+
+
