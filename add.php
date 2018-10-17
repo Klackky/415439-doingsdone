@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $content = include_template('error.php', ['error' => $error]);
     }
     else {
-      header("Location: /doingsdone");
+      header("Location: index.php");
     }
   }
 }

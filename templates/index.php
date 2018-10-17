@@ -7,10 +7,10 @@
 
 <div class="tasks-controls">
   <nav class="tasks-switch">
-    <a href="/doingsdone" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-    <a href="/doingsdone?filter_type=today<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Повестка дня</a>
-    <a href="/doingsdone?filter_type=tomorrow<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Завтра</a>
-    <a href="/doingsdone?filter_type=overdue<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Просроченные</a>
+    <a href="/ndex.php?" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
+    <a href="/index.php?filter_type=today<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Повестка дня</a>
+    <a href="/index.php?filter_type=tomorrow<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Завтра</a>
+    <a href="/index.php?filter_type=overdue<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Просроченные</a>
   </nav>
 
   <label class="checkbox">

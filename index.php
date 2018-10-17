@@ -31,7 +31,7 @@ if (!empty($_SESSION['user'])) {
     intval($_GET['task_id']);
     $result = update_task_status($connect, $_GET['task_id']);
     if ($result) {
-      header("Location: /doingsdone");
+      header("Location: index.php");
     }
   }
 

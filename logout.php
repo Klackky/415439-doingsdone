@@ -4,4 +4,4 @@ var_dump($_SESSION);
 if (isset($_SESSION['user'])) {
     unset($_SESSION['user']);
 }
-header('Location: /doingsdone');
+header('Location: index.php');

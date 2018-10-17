@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if(empty($errors) and !empty($user)) {
     if (password_verify($_POST['password'], $user['password'])) {
       $_SESSION['user'] = $user;
-      header("Location: /doingsdone");
+      header("Location: index.php");
       exit();
     }
     else {
