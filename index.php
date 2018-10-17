@@ -5,7 +5,7 @@ if (!empty($_SESSION['user'])) {
   if (isset($_GET['project_id'])) {
     $filtered_project = true;
 
-    $project_id = $_GET['project_id'] ? (int) $_GET['project_id'] : null;
+    $project_id = $_GET['project_id'] ? (int) $_GET['project_id'] : 0;
     $request_project = "SELECT `title`, `project_id` FROM projects WHERE project_id = $project_id and user_id = $user_id";
     $filtered_project = get_array_from_sql($connect, $request_project);
 

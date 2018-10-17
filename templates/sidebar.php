@@ -5,7 +5,7 @@
   <nav class="main-navigation">
     <ul class="main-navigation__list">
       <li class="main-navigation__list-item">
-        <a class="main-navigation__list-item-link" href="?project_id=0">Без проекта</a>
+        <a class="main-navigation__list-item-link" href="index.php?project_id=0">Без проекта</a>
         <span class="main-navigation__list-item-count">
           <?= calculate_unsorted_tasks($default_tasks)?></span>
       </li>

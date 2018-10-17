@@ -8,6 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($task['title'])) {
     $errors['title'] = 'Укажите название задачи';
   }
+  elseif (mb_strlen($task['title'])> 30) {
+    $errors['title'] = 'Длина названия задачи не может превышать 30 символов';
+  }
 
   if (!empty($task['deadline'])) {
     $task['deadline'] = date('Y-m-d', strtotime( htmlspecialchars($task['deadline'])));
@@ -21,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $path = $_FILES['preview']['name'];
     $file_type = mime_content_type($tmp_name);
     $types = array("text/plain", "text/html");
-    if (!in_array($file_type, $types)) {
+  //  if (!in_array($file_type, $types)) {
+    if (strpos($file_type, 'text') !== 0) {
       $errors['file'] = 'Загрузите текстовый файл';
     }
     else {

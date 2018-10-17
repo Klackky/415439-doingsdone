@@ -46,7 +46,7 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $f
   intval($user_id);
   $sql_part = '';
 
-  if ($project_id === null) {
+  if ($project_id === 0) {
       $sql_part .= ' AND project_id IS NULL';
   }
   elseif ($project_id) {

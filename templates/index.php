@@ -7,10 +7,11 @@
 
 <div class="tasks-controls">
   <nav class="tasks-switch">
-    <a href="/index.php?filter_type=all<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-    <a href="/index.php?filter_type=today<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Повестка дня</a>
-    <a href="/index.php?filter_type=tomorrow<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Завтра</a>
-    <a href="/index.php?filter_type=overdue<?= !empty($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '' ?>" class="tasks-switch__item">Просроченные</a>
+    <?php $params = isset($_GET['project_id']) ? "&project_id=" . $_GET['project_id'] : '';?>
+    <a href="/index.php?filter_type=all<?= $params ?>" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
+    <a href="/index.php?filter_type=today<?= $params ?>" class="tasks-switch__item">Повестка дня</a>
+    <a href="/index.php?filter_type=tomorrow<?= $params ?>" class="tasks-switch__item">Завтра</a>
+    <a href="/index.php?filter_type=overdue<?= $params ?>" class="tasks-switch__item">Просроченные</a>
   </nav>
 
   <label class="checkbox">
