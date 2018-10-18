@@ -11,14 +11,7 @@ if (!empty($_SESSION['user'])) {
 
 
     if(!$filtered_project) {
-      $error = http_response_code(404);
-      $content = include_template('error.php', ['error' => $error]);
-      $layout_content = include_template('layout.php', [
-      'title' => 'Дела в порядке',
-      'content' => $content
-      ]);
-      print ($layout_content);
-      die();
+      http_response_code(404);
     }
   }
 
@@ -41,8 +34,18 @@ if (!empty($_SESSION['user'])) {
     }
   }
 
+
   $sql_tasks = get_tasks_array_by($user_id, $project_id, $show_completed_tasks, $filter_type);
   $tasks = get_array_from_sql($connect, $sql_tasks);
+
+  if (isset($_GET['search'])) {
+    $search = trim($_GET['search']);
+    if (!empty($search)) {
+      $result = search_tasks($connect, $search, $user_id);
+      $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+  }
+
 
   $content = include_template('index.php', [
     'tasks' => $tasks,

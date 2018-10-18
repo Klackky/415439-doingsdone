@@ -33,3 +33,4 @@ CREATE TABLE users (
 
 CREATE UNIQUE INDEX email ON users(email);
 CREATE UNIQUE INDEX name ON users(name);
+CREATE FULLTEXT INDEX tasks_search ON tasks (title);

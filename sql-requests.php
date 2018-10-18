@@ -1,5 +1,7 @@
 <?php
 
+require_once('mysql_helper.php');
+
 /**
  * function forms sql request for projects
  *
@@ -68,5 +70,22 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $f
                FROM tasks WHERE user_id = $user_id $sql_part";
 
   return $sql_tasks;
+}
+
+/**
+ * function responsible for fulltext search
+ * @param object $connect
+ * @param string $search_word word we are searching for
+ * @param int $user_id id of current user
+ * @return boolean result
+ */
+function search_tasks($connect, $search_word, $user_id) {
+  intval($user_id);
+  $sql = "SELECT * FROM tasks
+          WHERE user_id = $user_id AND MATCH (title) AGAINST (?)";
+  $stmt = db_get_prepare_stmt($connect, $sql, [$search_word]);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  return $result;
 }
 
