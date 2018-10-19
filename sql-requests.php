@@ -79,6 +79,7 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $f
  * @param int $user_id id of current user
  * @return boolean result
  */
+
 function search_tasks($connect, $search_word, $user_id) {
   intval($user_id);
   $sql = "SELECT * FROM tasks

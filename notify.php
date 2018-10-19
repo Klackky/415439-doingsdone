@@ -14,7 +14,6 @@ $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
 
 
 $result = get_tasks_with_expired_date($connection);
-
 if ($result && mysqli_num_rows($result)) {
   $expired_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
   $recipients = [];
