@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 
-  if (!check_if_project_id_exists($connect, $task['project_id'], $user_id)) {
-    $errors['project'] = 'Выберите существующий проект';
+  if (!empty($task['project_id'])) {
+    if (!check_if_project_id_exists($connect, $task['project_id'], $user_id)) {
+      $errors['project'] = 'Выберите существующий проект';
+    }
   }
-
-  var_dump(!check_if_project_id_exists($connect, $task['project_id'], $user_id));
 
 
   if (!empty($_FILES['preview']['name'])) {
@@ -79,6 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 }
+
+
 
 $sidebar = include_template('sidebar.php', [
   'projects' => $projects,

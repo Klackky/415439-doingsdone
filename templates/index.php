@@ -25,7 +25,7 @@
   <?php foreach ($tasks as $task): ?>
     <?php if (!$task['completed'] || ($show_completed_tasks && $task['completed'])): ?>
       <tr class="tasks__item task
-      <?php if (calculate_time_left_to_date($task['deadline'])): ?> task--important<?php endif; ?>
+      <?= isset($task['deadline']) && calculate_time_left_to_date($task['deadline']) ? 'task--important' : ''; ?>
       <?php if ($task['completed']): ?> task--completed<?php endif; ?>
       ">
         <td class="task__select">

@@ -19,12 +19,15 @@
       <option value="<?=$project['project_id'] ?>"<?=isset($_POST['project_id']) && ($_POST['project_id'] === $project['project_id']) ? 'selected' : ''?>><?=$project['title']?> </option>
     <?php endforeach;?>
     </select>
+    <?php if (isset($errors['project'])) : ?>
+      <p class="form__message"><span class ="form__message error-message"><?=$errors['project']?></span></p>
+    <?php endif; ?>
   </div>
 
   <div class="form__row">
     <label class="form__label" for="date">Дата выполнения</label>
 
-    <input class="form__input form__input--date <?= (isset($errors['deadline'])) ? 'form__input--error' : ''?>" type="date" name="deadline" id="date" value="<?= htmlspecialchars($_POST['deadline']) ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+    <input class="form__input form__input--date <?= (isset($errors['deadline'])) ? 'form__input--error' : ''?>" type="date" name="deadline" id="date" value="<?php if (isset($_POST['deadline'])): ?><?= htmlspecialchars($_POST['deadline'])?><?php endif; ?>" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
     <?php if (isset($errors['deadline'])) : ?>
       <p class="form__message"><span class ="form__message error-message"><?=$errors['deadline']?></span></p>
     <?php endif; ?>
