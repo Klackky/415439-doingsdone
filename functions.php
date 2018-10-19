@@ -124,9 +124,9 @@ function check_if_email_already_exists($connect, $email) {
  * @return boolean result
 */
 
-function check_if_project_already_exists($connect, $project) {
+function check_if_project_already_exists($connect, $project, $user_id) {
   $project = mysqli_real_escape_string($connect, $project);
-  $sql_project = "SELECT project_id FROM projects WHERE title = '$project'";
+  $sql_project = "SELECT project_id FROM projects WHERE title = '$project' AND user_id = $user_id";
   $result = mysqli_query($connect, $sql_project);
   return (mysqli_num_rows($result) > 0);
 }

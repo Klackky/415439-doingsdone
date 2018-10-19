@@ -18,8 +18,9 @@ CREATE TABLE tasks (
   created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   completed tinyint(1) NOT NULL DEFAULT '0',
   deadline DATETIME,
-  title TEXT(30) NOT NULL,
-  link TEXT(300)
+  title TEXT(100) NOT NULL,
+  link TEXT(300),
+  file TEXT(300)
 );
 
 CREATE TABLE users (

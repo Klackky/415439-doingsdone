@@ -46,7 +46,6 @@ if (!empty($_SESSION['user'])) {
     }
   }
 
-
   $content = include_template('index.php', [
     'tasks' => $tasks,
     'project_id' => $project_id,

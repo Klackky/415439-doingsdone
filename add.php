@@ -8,8 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($task['title'])) {
     $errors['title'] = 'Укажите название задачи';
   }
-  elseif (mb_strlen($task['title'])> 30) {
-    $errors['title'] = 'Длина названия задачи не может превышать 30 символов';
+  elseif (mb_strlen($task['title']) > 100) {
+    $errors['title'] = 'Длина названия задачи не может превышать 100 символов';
   }
 
   if (!empty($task['deadline'])) {
@@ -36,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $new_name = uniqid() . '.' . $name_extension;
       $uploaded_file = './uploaded/'.$new_name;
       move_uploaded_file($tmp_name, $uploaded_file);
-      $task['path'] = $path;
+      $task['file'] = $path;
+      $task['path'] = $new_name;
     }
   }
   elseif ($task['uploaded_file']) {
@@ -47,14 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
   if (!count($errors)) {
-    $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link) VALUES (?, ?, NOW(), 0, ?, ?, ?)';
+    $sql = 'INSERT INTO tasks (project_id, user_id, created, completed, deadline, title, link, file) VALUES (?, ?, NOW(), 0, ?, ?, ?, ?)';
     $project_id = $task['project_id'] ?: null;
     $user_id = $_SESSION['user']['user_id'];
     $deadline = $task['deadline'] ?: null;
     $title = $task['title'];
     $link = $task['path'] ?? null;
+    $file = $task['file'] ?? null;
     $stmt = mysqli_prepare($connect, $sql);
-    mysqli_stmt_bind_param($stmt, 'iisss', $project_id, $user_id, $deadline, $title, $link);
+    mysqli_stmt_bind_param($stmt, 'iissss', $project_id, $user_id, $deadline, $title, $link, $file);
     $result = mysqli_stmt_execute($stmt);
     if (!$result) {
       $error = mysqli_error($connect);

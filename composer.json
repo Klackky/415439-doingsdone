@@ -1,0 +1,13 @@
+{
+    "name": "klackky/www",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Natalia Volchatova",
+            "email": "natalia.volchatova@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.0"
+    }
+}

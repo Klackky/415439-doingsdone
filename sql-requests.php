@@ -66,7 +66,7 @@ function get_tasks_array_by($user_id, $project_id = false, $completed = null, $f
   if ($completed === 1) {
       $sql_part .= " AND completed = {$completed}";
   }
-  $sql_tasks = "SELECT `task_id`, `title`, `deadline`, `project_id`, `completed`, `link`
+  $sql_tasks = "SELECT `task_id`, `title`, `deadline`, `project_id`, `completed`, `link`, `file`
                FROM tasks WHERE user_id = $user_id $sql_part";
 
   return $sql_tasks;
@@ -89,3 +89,18 @@ function search_tasks($connect, $search_word, $user_id) {
   return $result;
 }
 
+/**
+ * function responsible for getting tasks with expired date
+ * @param object $connect
+ * @return boolean result
+ */
+
+function get_tasks_with_expired_date($connect) {
+  $sql = 'SELECT * FROM `tasks`
+          JOIN `users` ON tasks.user_id = users.user_id
+          WHERE completed = 0
+          AND `deadline` >= CURRENT_TIMESTAMP
+          AND `deadline` <= DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 HOUR);';
+  $result = mysqli_query($connection, $sql);
+  return $result;
+}
