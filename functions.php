@@ -132,6 +132,21 @@ function check_if_project_already_exists($connect, $project, $user_id) {
 }
 
 /**
+ * function checks if email exists in sql
+ *
+ * @param object $connect
+ * @param string $email string with posted project title
+ * @return boolean result
+*/
+
+function check_if_project_id_exists($connect, $project_id, $user_id) {
+  $project = mysqli_real_escape_string($connect, $project);
+  $sql_project = "SELECT project_id FROM projects WHERE project_id = '$project_id' AND user_id = $user_id";
+  $result = mysqli_query($connect, $sql_project);
+  return (mysqli_num_rows($result) > 0);
+}
+
+/**
  * function returns updated task status
  *
  * @param object $connect

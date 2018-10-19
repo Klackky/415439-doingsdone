@@ -22,6 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
 
+  if (!check_if_project_id_exists($connect, $task['project_id'], $user_id)) {
+    $errors['project'] = 'Выберите существующий проект';
+  }
+
+  var_dump(!check_if_project_id_exists($connect, $task['project_id'], $user_id));
+
 
   if (!empty($_FILES['preview']['name'])) {
     $tmp_name = $_FILES['preview']['tmp_name'];
